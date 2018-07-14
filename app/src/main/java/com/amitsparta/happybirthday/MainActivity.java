@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         GridView gridView = findViewById(R.id.gridView);
-        gridAdapter adapter = new gridAdapter(getApplicationContext(), 0);
+        gridAdapter adapter = new gridAdapter(getApplicationContext(), null);
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
