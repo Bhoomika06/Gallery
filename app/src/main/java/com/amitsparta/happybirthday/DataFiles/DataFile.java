@@ -4,8 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.File;
+import java.io.Serializable;
 
-public class DataFile {
+public class DataFile implements Serializable {
 
     private String filePath;
 
@@ -17,7 +18,13 @@ public class DataFile {
         return filePath;
     }
 
-    public Bitmap createImage() {
+    public Bitmap createThumbnail() {
+        BitmapFactory.Options bitmap = new BitmapFactory.Options();
+        bitmap.inSampleSize = 8;
+        return BitmapFactory.decodeFile(filePath, bitmap);
+    }
+
+    public Bitmap createImageOriginal() {
         return BitmapFactory.decodeFile(filePath);
     }
 }

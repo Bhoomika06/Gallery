@@ -51,6 +51,7 @@ public class FolderActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public void onLoadFinished(@NonNull Loader<HashSet<Folder>> loader, HashSet<Folder> data) {
         Log.i("LoaderInfo", "size " + folderList.size());
+        folderList.clear();
         folderList.addAll(data);
         Log.i("LoaderInfo", "size " + folderList.size());
 

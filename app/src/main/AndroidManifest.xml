@@ -17,6 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ImageListActivity"
+            android:parentActivityName=".FolderActivity" />
+        <activity
+            android:name=".SingleImage"
+            android:parentActivityName=".ImageListActivity" />
 
     </application>
 
