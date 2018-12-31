@@ -1,14 +1,19 @@
 package com.amitsparta.happybirthday;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.amitsparta.happybirthday.Adapters.FolderAdapter;
 import com.amitsparta.happybirthday.DataFiles.Folder;
@@ -22,11 +27,22 @@ public class FolderActivity extends AppCompatActivity implements LoaderManager.L
 
     private ArrayList folderList;
     private FolderAdapter folderAdapter;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
+
+        int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    1);
+        }
+
+        progressBar = findViewById(R.id.progress_bar);
 
         RecyclerView recyclerView = findViewById(R.id.folder_list);
 
@@ -55,6 +71,7 @@ public class FolderActivity extends AppCompatActivity implements LoaderManager.L
         folderList.addAll(data);
         Log.i("LoaderInfo", "size " + folderList.size());
 
+        progressBar.setVisibility(View.GONE);
         Log.i("LoaderInfo", "Ended");
         folderAdapter.notifyItemInserted(folderList.size());
     }
