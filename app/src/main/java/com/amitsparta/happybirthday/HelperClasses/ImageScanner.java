@@ -1,8 +1,11 @@
-package com.amitsparta.happybirthday.DataFiles;
+package com.amitsparta.happybirthday.HelperClasses;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
+
+import com.amitsparta.happybirthday.DataFiles.DataFile;
+import com.amitsparta.happybirthday.DataFiles.Folder;
 
 import java.io.File;
 import java.util.HashSet;

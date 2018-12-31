@@ -8,7 +8,7 @@ public class Folder implements Serializable {
     private ArrayList<DataFile> images;
     private String folderName;
 
-    Folder(String folderName) {
+    public Folder(String folderName) {
         images = new ArrayList<>();
         this.folderName = folderName;
     }

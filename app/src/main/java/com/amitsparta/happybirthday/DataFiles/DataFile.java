@@ -10,7 +10,7 @@ public class DataFile implements Serializable {
 
     private String filePath;
 
-    DataFile(File file) {
+    public DataFile(File file) {
         this.filePath = file.getAbsolutePath();
     }
 

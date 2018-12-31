@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.amitsparta.happybirthday.Adapters.ImageAdapter;
 import com.amitsparta.happybirthday.DataFiles.Folder;
@@ -33,6 +34,16 @@ public class ImageListActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

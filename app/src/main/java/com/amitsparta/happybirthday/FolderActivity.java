@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 
 import com.amitsparta.happybirthday.Adapters.FolderAdapter;
 import com.amitsparta.happybirthday.DataFiles.Folder;
-import com.amitsparta.happybirthday.DataFiles.ImageScanner;
+import com.amitsparta.happybirthday.HelperClasses.ImageScanner;
 
 import java.io.File;
 import java.util.ArrayList;
