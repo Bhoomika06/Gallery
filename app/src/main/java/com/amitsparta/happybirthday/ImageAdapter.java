@@ -11,12 +11,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridItemHolder> {
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.GridItemHolder> {
 
     private ArrayList itemList;
     private Context context;
 
-    public GridAdapter(Context context, ArrayList itemList) {
+    public ImageAdapter(Context context, ArrayList itemList) {
         this.context = context;
         this.itemList = itemList;
     }
