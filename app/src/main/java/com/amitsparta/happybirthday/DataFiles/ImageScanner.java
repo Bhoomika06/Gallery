@@ -1,25 +1,34 @@
-package com.amitsparta.happybirthday;
+package com.amitsparta.happybirthday.DataFiles;
 
-import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
+import android.util.Log;
 
 import java.io.File;
 import java.util.HashSet;
 
-class ImageScanner extends AsyncTaskLoader<HashSet<Folder>>{
+public class ImageScanner extends AsyncTaskLoader<HashSet<Folder>> {
 
     private File root;
     private HashSet<Folder> folderList;
 
-    ImageScanner(Context context, File root) {
+    public ImageScanner(Context context, File root) {
         super(context);
         this.root = root;
         folderList = new HashSet<>();
     }
 
     @Override
+    protected void onStartLoading() {
+        super.onStartLoading();
+        forceLoad();
+    }
+
+    @Override
     public HashSet<Folder> loadInBackground() {
+        Log.i("LoaderInfo", "Started");
         collectImages(root);
+        Log.i("LoaderInfo", "Done");
         return folderList;
     }
 

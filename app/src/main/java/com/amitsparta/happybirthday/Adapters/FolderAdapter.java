@@ -1,4 +1,4 @@
-package com.amitsparta.happybirthday;
+package com.amitsparta.happybirthday.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,38 +9,37 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import com.amitsparta.happybirthday.DataFiles.DataFile;
+import com.amitsparta.happybirthday.DataFiles.Folder;
+import com.amitsparta.happybirthday.R;
 
-class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHolder> {
+import java.util.ArrayList;
+
+public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHolder> {
 
     private Context context;
-    private Folder folders[];
+    private ArrayList folders;
 
-    FolderAdapter(Context context, HashSet<Folder> hashSet ) {
+    public FolderAdapter(Context context, ArrayList folders) {
         this.context = context;
-        folders = hashSet.toArray(new Folder[hashSet.size()]);
+        this.folders = folders;
     }
 
     @NonNull
     @Override
     public FolderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.grid_item, parent);
+        View view = LayoutInflater.from(context).inflate(R.layout.grid_item, parent, false);
         return new FolderHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FolderHolder holder, int position) {
-        try {
-            holder.displayItem(folders[position]);
-        }catch (ArrayIndexOutOfBoundsException e) {
-            holder.displayItem(folders[position - 1]);
-        }
+        holder.displayItem((Folder) folders.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return folders.length;
+        return folders.size();
     }
 
     class FolderHolder extends RecyclerView.ViewHolder {
@@ -57,8 +56,8 @@ class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHolder> {
             TextView fileName = itemView.findViewById(R.id.file_name);
 
             DataFile file = item.getImages().get(0);
-            image.setImageBitmap(file.getImage());
-            fileName.setText(file.getFilePath());
+            image.setImageBitmap(file.createImage());
+            fileName.setText(item.getFolderName());
         }
     }
 }

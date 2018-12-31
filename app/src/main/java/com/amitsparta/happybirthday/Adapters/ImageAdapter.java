@@ -1,4 +1,4 @@
-package com.amitsparta.happybirthday;
+package com.amitsparta.happybirthday.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.amitsparta.happybirthday.DataFiles.DataFile;
+import com.amitsparta.happybirthday.R;
 
 import java.util.ArrayList;
 
@@ -24,7 +27,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.GridItemHold
     @NonNull
     @Override
     public GridItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.grid_item, parent);
+        View view = LayoutInflater.from(context).inflate(R.layout.grid_item, parent, false);
         return new GridItemHolder(view);
     }
 
@@ -51,7 +54,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.GridItemHold
             ImageView image = itemView.findViewById(R.id.file_image);
             TextView fileName = itemView.findViewById(R.id.file_name);
 
-            image.setImageBitmap(item.getImage());
+            image.setImageBitmap(item.createImage());
             fileName.setText(item.getFilePath());
         }
     }
