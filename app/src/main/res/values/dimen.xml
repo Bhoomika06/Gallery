@@ -8,11 +8,11 @@
     <!--
         Thumbnail image max height
     -->
-    <dimen name="image_max_height">40dp</dimen>
+    <dimen name="image_max_height">80dp</dimen>
 
     <!--
         Thumbnail image max width
     -->
-    <dimen name="image_max_width">40dp</dimen>
+    <dimen name="image_max_width">80dp</dimen>
 
 </resources>
