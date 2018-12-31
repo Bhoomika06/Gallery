@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Item margin, used in @link grid_item, Relative layout
+    -->
+    <dimen name="item_margin">5dp</dimen>
+
+    <!--
+        Thumbnail image max height
+    -->
+    <dimen name="image_max_height">40dp</dimen>
+
+    <!--
+        Thumbnail image max width
+    -->
+    <dimen name="image_max_width">40dp</dimen>
+
+</resources>

@@ -1,21 +1,23 @@
 package com.amitsparta.happybirthday;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 public class DataFile {
 
-    private String textToDisplay;
-    private int image;
+    private String filePath;
+    private Bitmap image;
 
-    DataFile(int image, String textToDisplay) {
-        this.textToDisplay = textToDisplay;
-        this.image = image;
+    DataFile(String filePath) {
+        this.filePath = filePath;
+        image = BitmapFactory.decodeFile(filePath);
     }
 
-    public int getImage() {
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public Bitmap getImage() {
         return image;
     }
-
-    public String getTextToDisplay() {
-        return textToDisplay;
-    }
-
 }
