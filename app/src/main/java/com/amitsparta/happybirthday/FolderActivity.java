@@ -58,7 +58,8 @@ public class FolderActivity extends AppCompatActivity {
                 folderList.clear();
                 folderList.addAll(folders);
                 folderAdapter.notifyItemInserted(folderList.size());
-                progressBar.setVisibility(View.GONE);
+                if (folderList.size() > 0)
+                    progressBar.setVisibility(View.GONE);
             }
         });
     }

@@ -1,8 +1,10 @@
 package com.amitsparta.happybirthday.HelperClasses;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.amitsparta.happybirthday.DataFiles.DataFile;
@@ -22,10 +24,19 @@ public class ImageScanner extends ViewModel {
         folderList = new HashSet<>();
     }
 
+    @SuppressLint("StaticFieldLeak")
     public LiveData<HashSet<Folder>> getFolderList() {
         if (folderListLiveData == null) {
             folderListLiveData = new MutableLiveData<>();
-            collectImages(root);
+            new AsyncTask<Void, Void, Void>() {
+
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    collectImages(root);
+                    folderListLiveData.postValue(folderList);
+                    return null;
+                }
+            }.execute();
             folderListLiveData.setValue(folderList);
         }
         return folderListLiveData;
