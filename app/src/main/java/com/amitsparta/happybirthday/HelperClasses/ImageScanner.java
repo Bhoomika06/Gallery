@@ -1,8 +1,9 @@
 package com.amitsparta.happybirthday.HelperClasses;
 
-import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
-import android.util.Log;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
 
 import com.amitsparta.happybirthday.DataFiles.DataFile;
 import com.amitsparta.happybirthday.DataFiles.Folder;
@@ -10,32 +11,27 @@ import com.amitsparta.happybirthday.DataFiles.Folder;
 import java.io.File;
 import java.util.HashSet;
 
-public class ImageScanner extends AsyncTaskLoader<HashSet<Folder>> {
+public class ImageScanner extends ViewModel {
 
     private File root;
     private HashSet<Folder> folderList;
+    private MutableLiveData<HashSet<Folder>> folderListLiveData;
 
-    public ImageScanner(Context context, File root) {
-        super(context);
+    public ImageScanner(File root) {
         this.root = root;
         folderList = new HashSet<>();
     }
 
-    @Override
-    protected void onStartLoading() {
-        super.onStartLoading();
-        forceLoad();
+    public LiveData<HashSet<Folder>> getFolderList() {
+        if (folderListLiveData == null) {
+            folderListLiveData = new MutableLiveData<>();
+            collectImages(root);
+            folderListLiveData.setValue(folderList);
+        }
+        return folderListLiveData;
     }
 
-    @Override
-    public HashSet<Folder> loadInBackground() {
-        Log.i("LoaderInfo", "Started");
-        collectImages(root);
-        Log.i("LoaderInfo", "Done");
-        return folderList;
-    }
-
-    private void collectImages(File file) {
+    private void collectImages(@NonNull File file) {
         File internalFiles[] = file.listFiles();
         if (internalFiles == null || file.getName().equals("Android"))
             return;
