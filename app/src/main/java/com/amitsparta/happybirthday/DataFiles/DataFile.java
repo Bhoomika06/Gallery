@@ -9,9 +9,11 @@ import java.io.Serializable;
 public class DataFile implements Serializable {
 
     private String filePath;
+    private String fileName;
 
     public DataFile(File file) {
         this.filePath = file.getAbsolutePath();
+        fileName = file.getName();
     }
 
     public String getFilePath() {
@@ -26,5 +28,9 @@ public class DataFile implements Serializable {
 
     public Bitmap createImageOriginal() {
         return BitmapFactory.decodeFile(filePath);
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 }

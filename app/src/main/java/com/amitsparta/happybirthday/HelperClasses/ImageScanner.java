@@ -40,7 +40,10 @@ public class ImageScanner extends AsyncTaskLoader<HashSet<Folder>> {
         if (internalFiles == null || file.getName().equals("Android"))
             return;
         for (File file1: internalFiles) {
-            if (ImageDetector.checkIfImage(file1)) {
+            Boolean isImage = ImageDetector.checkIfImage(file1);
+            if (isImage == null) {
+                return;
+            } else if (isImage) {
                 addFolderAndImage(file1);
             } else {
                 collectImages(file1);

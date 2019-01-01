@@ -59,7 +59,7 @@ public class FolderActivity extends AppCompatActivity implements LoaderManager.L
     @NonNull
     @Override
     public Loader<HashSet<Folder>> onCreateLoader(int id, @Nullable Bundle args) {
-        File file = new File("/storage/emulated/0");
+        File file = new File(Folder.ABSOLUTE_FILE_PATH);
         Log.i("LoaderInfo", "Created");
         return new ImageScanner(getApplicationContext(), file);
     }

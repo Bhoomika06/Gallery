@@ -66,7 +66,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.GridItemHold
             TextView fileName = itemView.findViewById(R.id.file_name);
 
             image.setImageBitmap(item.createThumbnail());
-            fileName.setText(item.getFilePath());
+            fileName.setText(item.getFileName());
         }
     }
 

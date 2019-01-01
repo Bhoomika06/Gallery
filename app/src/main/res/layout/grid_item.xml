@@ -12,16 +12,14 @@
         android:layout_width="@dimen/image_max_width"
         android:layout_height="@dimen/image_max_height"
         tools:src="@mipmap/ic_launcher"
-        android:contentDescription="@string/app_name"
-        android:layout_gravity="center" />
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:id="@+id/file_name"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/image_max_width"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         tools:text="Folder name"
-        android:layout_gravity="bottom"
         android:textColor="@color/text_color" />
 
 </LinearLayout>
