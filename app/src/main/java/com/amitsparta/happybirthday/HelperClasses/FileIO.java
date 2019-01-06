@@ -1,5 +1,7 @@
 package com.amitsparta.happybirthday.HelperClasses;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.amitsparta.happybirthday.DataFiles.Folder;
@@ -69,6 +71,27 @@ public final class FileIO {
         if (FileIO.hasFolderList()) {
             File file = new File(Folder.HIDDEN_FILE_PATH + Folder.HIDDEN_FOLDER_LIST_FILE_NAME);
             file.delete();
+        }
+    }
+
+    public static boolean hasThumbnailFile(String fileName) {
+        File file = new File(Folder.HIDDEN_FILE_PATH, fileName);
+        return file.exists();
+    }
+
+    public static Bitmap getThumbnail(String fileName) {
+        File file = new File(Folder.HIDDEN_FILE_PATH, fileName);
+        return BitmapFactory.decodeFile(file.getAbsolutePath());
+    }
+
+    public static void storeThumbnail(Bitmap bitmap, String fileName) {
+        File file = new File(Folder.HIDDEN_FILE_PATH, fileName);
+        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

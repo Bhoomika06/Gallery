@@ -44,7 +44,7 @@ public class ImageScanner extends ViewModel {
 
     private void collectImages(@NonNull File file) {
         File internalFiles[] = file.listFiles();
-        if (internalFiles == null || file.getName().equals("Android"))
+        if (internalFiles == null || file.getName().equals("Android") || file.getName().equals(Folder.HIDDEN_FILE_NAME))
             return;
         for (File file1: internalFiles) {
             Boolean isImage = ImageDetector.checkIfImage(file1);

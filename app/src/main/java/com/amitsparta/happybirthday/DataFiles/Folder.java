@@ -11,7 +11,9 @@ public class Folder implements Serializable {
 
     public static final String ABSOLUTE_FILE_PATH = "/storage/emulated/0";
 
-    public static final String HIDDEN_FILE_PATH = ABSOLUTE_FILE_PATH + "/.galleryImages";
+    public static final String HIDDEN_FILE_NAME = "/.galleryImages";
+
+    public static final String HIDDEN_FILE_PATH = ABSOLUTE_FILE_PATH + HIDDEN_FILE_NAME;
 
     public static final String HIDDEN_FOLDER_LIST_FILE_NAME = "/folderList.ser";
 

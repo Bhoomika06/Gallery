@@ -3,6 +3,8 @@ package com.amitsparta.happybirthday.DataFiles;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.amitsparta.happybirthday.HelperClasses.FileIO;
+
 import java.io.File;
 import java.io.Serializable;
 
@@ -21,9 +23,15 @@ public class Image implements Serializable {
     }
 
     public Bitmap createThumbnail() {
-        BitmapFactory.Options bitmap = new BitmapFactory.Options();
-        bitmap.inSampleSize = 8;
-        return BitmapFactory.decodeFile(filePath, bitmap);
+        if (FileIO.hasThumbnailFile(fileName)) {
+            return FileIO.getThumbnail(fileName);
+        } else {
+            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+            bitmapOptions.inSampleSize = 8;
+            Bitmap bitmap = BitmapFactory.decodeFile(filePath, bitmapOptions);
+            FileIO.storeThumbnail(bitmap, fileName);
+            return bitmap;
+        }
     }
 
     public Bitmap createImageOriginal() {
