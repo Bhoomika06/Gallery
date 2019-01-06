@@ -1,7 +1,10 @@
 package com.amitsparta.happybirthday.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -61,12 +64,25 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.GridItemHold
             this.itemView = itemView;
         }
 
+        @SuppressLint("StaticFieldLeak")
         void displayItem(Image item) {
-            ImageView image = itemView.findViewById(R.id.file_image);
+            final ImageView image = itemView.findViewById(R.id.file_image);
             TextView fileName = itemView.findViewById(R.id.file_name);
 
-            image.setImageBitmap(item.createThumbnail());
             fileName.setText(item.getFileName());
+
+            new AsyncTask<Image, Void, Bitmap>() {
+
+                @Override
+                protected Bitmap doInBackground(Image... strings) {
+                    return strings[0].createThumbnail();
+                }
+
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    image.setImageBitmap(bitmap);
+                }
+            }.execute(item);
         }
     }
 

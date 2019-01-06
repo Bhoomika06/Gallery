@@ -68,7 +68,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
 
             Image file = item.getImages().get(0);
             image.setImageBitmap(file.createThumbnail());
-            fileName.append(item.getFolderName());
+            fileName.setText(item.getFolderName());
         }
     }
 }

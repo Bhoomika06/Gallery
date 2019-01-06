@@ -11,6 +11,10 @@ public class Folder implements Serializable {
 
     public static final String ABSOLUTE_FILE_PATH = "/storage/emulated/0";
 
+    public static final String HIDDEN_FILE_PATH = ABSOLUTE_FILE_PATH + "/.galleryImages";
+
+    public static final String HIDDEN_FOLDER_LIST_FILE_NAME = "/folderList.txt";
+
     public Folder(String folderPath) {
         images = new ArrayList<>();
         this.folderPath = folderPath;
@@ -55,9 +59,5 @@ public class Folder implements Serializable {
 
     public boolean compareFolders(String folder) {
         return createFolderName(folder).equals(folderName);
-    }
-
-    public String getFolderPath() {
-        return folderPath;
     }
 }
