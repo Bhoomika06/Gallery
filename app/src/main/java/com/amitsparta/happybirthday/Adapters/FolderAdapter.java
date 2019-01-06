@@ -1,7 +1,10 @@
 package com.amitsparta.happybirthday.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,13 +38,13 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FolderHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final FolderHolder holder, int position) {
         holder.displayItem((Folder) folders.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ImageListActivity.class);
-                intent.putExtra(ImageListActivity.FOLDER_INTENT_EXTRA, (Folder) folders.get(position));
+                intent.putExtra(ImageListActivity.FOLDER_INTENT_EXTRA, (Folder) folders.get(holder.getAdapterPosition()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
@@ -62,13 +65,26 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
             this.itemView = itemView;
         }
 
+        @SuppressLint("StaticFieldLeak")
         void displayItem(Folder item) {
-            ImageView image = itemView.findViewById(R.id.file_image);
+            final ImageView image = itemView.findViewById(R.id.file_image);
             TextView fileName = itemView.findViewById(R.id.file_name);
 
             Image file = item.getImages().get(0);
-            image.setImageBitmap(file.createThumbnail());
             fileName.setText(item.getFolderName());
+
+            new AsyncTask<Image, Void, Bitmap>() {
+
+                @Override
+                protected Bitmap doInBackground(Image... strings) {
+                    return strings[0].createThumbnail();
+                }
+
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    image.setImageBitmap(bitmap);
+                }
+            }.execute(file);
         }
     }
 }
