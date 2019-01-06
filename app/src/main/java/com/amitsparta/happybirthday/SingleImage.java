@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.amitsparta.happybirthday.DataFiles.DataFile;
+import com.amitsparta.happybirthday.DataFiles.Image;
 
 public class SingleImage extends AppCompatActivity {
 
@@ -19,13 +19,13 @@ public class SingleImage extends AppCompatActivity {
         setContentView(R.layout.single_image);
 
         Intent intent = getIntent();
-        DataFile dataFile = null;
+        Image image = null;
         if (intent.hasExtra(IMAGE_INTENT_EXTRA)) {
-            dataFile = (DataFile) intent.getSerializableExtra(IMAGE_INTENT_EXTRA);
+            image = (Image) intent.getSerializableExtra(IMAGE_INTENT_EXTRA);
         }
 
         ImageView imageView = findViewById(R.id.single_image);
-        imageView.setImageBitmap(dataFile.createImageOriginal());
+        imageView.setImageBitmap(image.createImageOriginal());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

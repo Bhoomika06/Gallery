@@ -7,8 +7,8 @@ import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.amitsparta.happybirthday.DataFiles.DataFile;
 import com.amitsparta.happybirthday.DataFiles.Folder;
+import com.amitsparta.happybirthday.DataFiles.Image;
 
 import java.io.File;
 import java.util.HashSet;
@@ -62,10 +62,10 @@ public class ImageScanner extends ViewModel {
         Folder folder = checkForFolder(file);
         if (folder == null) {
             folder = new Folder(file.getParent());
-            folder.add(new DataFile(file));
+            folder.add(new Image(file));
             folderList.add(folder);
         } else {
-            folder.add(new DataFile(file));
+            folder.add(new Image(file));
         }
     }
 

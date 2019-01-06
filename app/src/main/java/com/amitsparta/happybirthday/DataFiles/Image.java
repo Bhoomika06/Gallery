@@ -6,12 +6,12 @@ import android.graphics.BitmapFactory;
 import java.io.File;
 import java.io.Serializable;
 
-public class DataFile implements Serializable {
+public class Image implements Serializable {
 
     private String filePath;
     private String fileName;
 
-    public DataFile(File file) {
+    public Image(File file) {
         this.filePath = file.getAbsolutePath();
         fileName = file.getName();
     }

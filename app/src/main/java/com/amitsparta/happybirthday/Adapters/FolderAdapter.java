@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.amitsparta.happybirthday.DataFiles.DataFile;
 import com.amitsparta.happybirthday.DataFiles.Folder;
+import com.amitsparta.happybirthday.DataFiles.Image;
 import com.amitsparta.happybirthday.ImageListActivity;
 import com.amitsparta.happybirthday.R;
 
@@ -66,7 +66,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
             ImageView image = itemView.findViewById(R.id.file_image);
             TextView fileName = itemView.findViewById(R.id.file_name);
 
-            DataFile file = item.getImages().get(0);
+            Image file = item.getImages().get(0);
             image.setImageBitmap(file.createThumbnail());
             fileName.append(item.getFolderName());
         }

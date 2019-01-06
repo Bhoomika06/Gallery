@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Folder implements Serializable {
 
-    private ArrayList<DataFile> images;
+    private ArrayList<Image> images;
     private String folderPath;
     private String folderName;
 
@@ -41,11 +41,11 @@ public class Folder implements Serializable {
             return folderPath;
     }
 
-    public void add(DataFile dataFile) {
-        images.add(dataFile);
+    public void add(Image image) {
+        images.add(image);
     }
 
-    public ArrayList<DataFile> getImages() {
+    public ArrayList<Image> getImages() {
         return images;
     }
 
