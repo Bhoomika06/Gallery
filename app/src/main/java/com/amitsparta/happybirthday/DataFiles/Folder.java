@@ -13,7 +13,7 @@ public class Folder implements Serializable {
 
     public static final String HIDDEN_FILE_PATH = ABSOLUTE_FILE_PATH + "/.galleryImages";
 
-    public static final String HIDDEN_FOLDER_LIST_FILE_NAME = "/folderList.txt";
+    public static final String HIDDEN_FOLDER_LIST_FILE_NAME = "/folderList.ser";
 
     public Folder(String folderPath) {
         images = new ArrayList<>();

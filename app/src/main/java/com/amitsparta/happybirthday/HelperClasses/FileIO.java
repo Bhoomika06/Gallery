@@ -23,7 +23,14 @@ public final class FileIO {
 
     public static boolean writeFolderToFile(ArrayList<Folder> folderList) {
         File file = new File(Folder.HIDDEN_FILE_PATH);
-        file.mkdir();
+        if (file.mkdir()) {
+            File file1 = new File(Folder.HIDDEN_FILE_PATH + "/.nomedia");
+            try {
+                file1.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try (FileOutputStream outputStream = new FileOutputStream(
                 new File(Folder.HIDDEN_FILE_PATH + Folder.HIDDEN_FOLDER_LIST_FILE_NAME))) {
 
