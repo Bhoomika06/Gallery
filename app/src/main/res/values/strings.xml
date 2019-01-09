@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Gallery</string>
+
+    <!-- Resources used in @link image_extra_features_menu_item.xml -->
+
+    <!-- detail_menu_item-->
+    <string name="detail_menu_item">Details</string>
+
+    <!-- delete_menu_item-->
+    <string name="delete_menu_item">Delete</string>
+
+    <!-- move_menu_item -->
+    <string name="move_menu_item">Move</string>
+
+    <!-- copy_menu_item-->
+    <string name="copy_menu_item">Copy</string>
+
+    <!-- paste_menu_item-->
+    <string name="paste_menu_item">Paste</string>
+
+    <!-- rename_menu_item-->
+    <string name="rename_menu_item">Rename</string>
+
+
 </resources>

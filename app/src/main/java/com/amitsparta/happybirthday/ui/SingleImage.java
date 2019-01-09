@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -29,6 +30,12 @@ public class SingleImage extends AppCompatActivity {
         imageView.setImageBitmap(image.createImageOriginal());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.image_extra_featues_menu_item, menu);
+        return true;
     }
 
     @Override
