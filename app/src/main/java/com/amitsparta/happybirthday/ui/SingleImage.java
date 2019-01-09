@@ -1,4 +1,4 @@
-package com.amitsparta.happybirthday;
+package com.amitsparta.happybirthday.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.amitsparta.happybirthday.DataFiles.Image;
+import com.amitsparta.happybirthday.R;
 
 public class SingleImage extends AppCompatActivity {
 

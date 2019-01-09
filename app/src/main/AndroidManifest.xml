@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FolderActivity">
+        <activity android:name=".ui.FolderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,11 +21,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ImageListActivity"
-            android:parentActivityName=".FolderActivity" />
+            android:name=".ui.ImageListActivity"
+            android:parentActivityName=".ui.FolderActivity" />
         <activity
-            android:name=".SingleImage"
-            android:parentActivityName=".ImageListActivity" />
+            android:name=".ui.SingleImage"
+            android:parentActivityName=".ui.ImageListActivity" />
 
     </application>
 

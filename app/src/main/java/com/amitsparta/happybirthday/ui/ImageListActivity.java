@@ -1,4 +1,4 @@
-package com.amitsparta.happybirthday;
+package com.amitsparta.happybirthday.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.amitsparta.happybirthday.Adapters.ImageAdapter;
 import com.amitsparta.happybirthday.DataFiles.Folder;
+import com.amitsparta.happybirthday.R;
 
 import java.util.ArrayList;
 

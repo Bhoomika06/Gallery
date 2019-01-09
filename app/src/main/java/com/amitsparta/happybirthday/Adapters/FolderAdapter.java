@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.amitsparta.happybirthday.DataFiles.Folder;
 import com.amitsparta.happybirthday.DataFiles.Image;
-import com.amitsparta.happybirthday.ImageListActivity;
 import com.amitsparta.happybirthday.R;
+import com.amitsparta.happybirthday.ui.ImageListActivity;
 
 import java.util.ArrayList;
 

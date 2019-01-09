@@ -1,4 +1,4 @@
-package com.amitsparta.happybirthday;
+package com.amitsparta.happybirthday.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -19,6 +19,7 @@ import com.amitsparta.happybirthday.Adapters.FolderAdapter;
 import com.amitsparta.happybirthday.DataFiles.Folder;
 import com.amitsparta.happybirthday.HelperClasses.FileIO;
 import com.amitsparta.happybirthday.HelperClasses.ImageScanner;
+import com.amitsparta.happybirthday.R;
 
 import java.io.File;
 import java.util.ArrayList;
