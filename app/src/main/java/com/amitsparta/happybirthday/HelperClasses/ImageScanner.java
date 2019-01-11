@@ -49,7 +49,7 @@ public class ImageScanner extends ViewModel {
         for (File file1: internalFiles) {
             Boolean isImage = ImageDetector.checkIfImage(file1);
             if (isImage == null) {
-                return;
+                continue;
             } else if (isImage) {
                 addFolderAndImage(file1);
             } else {
