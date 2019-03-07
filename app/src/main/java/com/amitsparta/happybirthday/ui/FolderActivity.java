@@ -17,8 +17,8 @@ import android.widget.ProgressBar;
 
 import com.amitsparta.happybirthday.Adapters.FolderAdapter;
 import com.amitsparta.happybirthday.DataFiles.Folder;
+import com.amitsparta.happybirthday.HelperClasses.BackgroundImageScanner;
 import com.amitsparta.happybirthday.HelperClasses.FileIO;
-import com.amitsparta.happybirthday.HelperClasses.ImageScanner;
 import com.amitsparta.happybirthday.R;
 
 import java.io.File;
@@ -86,7 +86,7 @@ public class FolderActivity extends AppCompatActivity {
     }
 
     private void scanForMoreFolders() {
-        ImageScanner imageScanner = new ImageScanner(new File(Folder.ABSOLUTE_FILE_PATH));
+        BackgroundImageScanner imageScanner = new BackgroundImageScanner(new File(Folder.ABSOLUTE_FILE_PATH));
         imageScanner.getFolderList().observe(this, new Observer<HashSet<Folder>>() {
             @Override
             public void onChanged(@Nullable HashSet<Folder> folders) {

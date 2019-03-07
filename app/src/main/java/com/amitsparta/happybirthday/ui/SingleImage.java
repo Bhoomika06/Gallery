@@ -9,11 +9,13 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.amitsparta.happybirthday.DataFiles.Image;
+import com.amitsparta.happybirthday.HelperClasses.FileIO;
 import com.amitsparta.happybirthday.R;
 
 public class SingleImage extends AppCompatActivity {
 
     public static final String IMAGE_INTENT_EXTRA = "imageExtra";
+    private Image image;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,7 +23,7 @@ public class SingleImage extends AppCompatActivity {
         setContentView(R.layout.single_image);
 
         Intent intent = getIntent();
-        Image image = null;
+
         if (intent.hasExtra(IMAGE_INTENT_EXTRA)) {
             image = (Image) intent.getSerializableExtra(IMAGE_INTENT_EXTRA);
         }
@@ -40,9 +42,15 @@ public class SingleImage extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.delete_image:
+                FileIO.deleteImage(image);
+                onBackPressed();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

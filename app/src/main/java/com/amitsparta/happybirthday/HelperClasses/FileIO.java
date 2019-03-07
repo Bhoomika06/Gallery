@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.amitsparta.happybirthday.DataFiles.Folder;
+import com.amitsparta.happybirthday.DataFiles.Image;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +18,10 @@ import java.util.ArrayList;
 public final class FileIO {
     private FileIO() {
     }
+
+    /*
+     Folder related functions.
+     */
 
     public static boolean hasFolderList() {
         File file = new File(Folder.HIDDEN_FILE_PATH + Folder.HIDDEN_FOLDER_LIST_FILE_NAME);
@@ -74,6 +79,9 @@ public final class FileIO {
         }
     }
 
+    /*
+      Thumbnail related functions.
+     */
     public static boolean hasThumbnailFile(String fileName) {
         File file = new File(Folder.HIDDEN_FILE_PATH, fileName);
         return file.exists();
@@ -94,4 +102,26 @@ public final class FileIO {
             e.printStackTrace();
         }
     }
+
+    public static boolean deleteThumbnail(Image image) {
+        File file = new File(Folder.HIDDEN_FILE_PATH, image.getFileName());
+        if (file.exists()) {
+            return file.delete();
+        }
+        return false;
+    }
+
+    /*
+      Single image related functions.
+     */
+
+    public static boolean deleteImage(Image image) {
+        File file = new File(image.getFilePath());
+        if (file.delete()) {
+            return deleteThumbnail(image);
+        }
+        return false;
+    }
+
+
 }

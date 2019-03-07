@@ -3,31 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/details_image"
         android:orderInCategory="1"
         android:title="@string/detail_menu_item"
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/delete_image"
         android:orderInCategory="2"
         android:title="@string/delete_menu_item"
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/move_image"
         android:orderInCategory="3"
         android:title="@string/move_menu_item"
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/copy_image"
         android:orderInCategory="4"
         android:title="@string/copy_menu_item"
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/paste_image"
         android:orderInCategory="5"
         android:title="@string/paste_menu_item"
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/rename_image"
         android:orderInCategory="6"
         android:title="@string/rename_menu_item"
         app:showAsAction="never" />
