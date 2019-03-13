@@ -34,11 +34,20 @@ public class Image implements Serializable {
         }
     }
 
+    public String getReferencePath() {
+        int index = filePath.lastIndexOf(fileName);
+        return filePath.substring(0, index - 1);
+    }
+
     public Bitmap createImageOriginal() {
         return BitmapFactory.decodeFile(filePath);
     }
 
     public String getFileName() {
         return fileName;
+    }
+
+    public void setFileName(String name) {
+        fileName = name;
     }
 }

@@ -36,6 +36,7 @@ public class FolderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
 
+
         int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -69,7 +70,10 @@ public class FolderActivity extends AppCompatActivity {
                 @Override
                 protected Void doInBackground(Void... voids) {
                     folderList.clear();
-                    folderList.addAll(FileIO.getFolderFromFile());
+                    ArrayList tempArr = FileIO.getFolderFromFile();
+                    if (tempArr != null) {
+                        folderList.addAll(tempArr);
+                    }
                     if (folderList == null) {
                         Log.i("Folder Activity", "Null returned.");
                     }

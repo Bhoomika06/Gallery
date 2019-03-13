@@ -34,6 +34,7 @@ class ImageDetector {
     public static HashSet<Folder> collectImages(@NonNull File file, Void v) {
 
         ImageDetector detector = new ImageDetector();
+        detector.folderList = new HashSet<>();
         detector.collectImages(file);
         return detector.folderList;
 

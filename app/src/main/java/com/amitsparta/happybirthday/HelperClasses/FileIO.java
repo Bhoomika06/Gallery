@@ -57,7 +57,7 @@ public final class FileIO {
     public static ArrayList<Folder> getFolderFromFile() {
         File file = new File(Folder.HIDDEN_FILE_PATH);
         try (FileInputStream inputStream = new FileInputStream(
-                new File(file.getAbsolutePath() + Folder.HIDDEN_FOLDER_LIST_FILE_NAME))) {
+                new File(file.getAbsolutePath(), Folder.HIDDEN_FOLDER_LIST_FILE_NAME))) {
 
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             ArrayList a = (ArrayList<Folder>) objectInputStream.readObject();
@@ -74,7 +74,7 @@ public final class FileIO {
 
     public static void clearFile() {
         if (FileIO.hasFolderList()) {
-            File file = new File(Folder.HIDDEN_FILE_PATH + Folder.HIDDEN_FOLDER_LIST_FILE_NAME);
+            File file = new File(Folder.HIDDEN_FILE_PATH, Folder.HIDDEN_FOLDER_LIST_FILE_NAME);
             file.delete();
         }
     }
@@ -106,7 +106,10 @@ public final class FileIO {
     public static boolean deleteThumbnail(Image image) {
         File file = new File(Folder.HIDDEN_FILE_PATH, image.getFileName());
         if (file.exists()) {
-            return file.delete();
+            if (file.delete()) {
+                image.setFileName(null);
+                return true;
+            }
         }
         return false;
     }
@@ -123,5 +126,14 @@ public final class FileIO {
         return false;
     }
 
+    public static boolean renameImage(Image image, String name) {
+        File file = new File(image.getFilePath());
+        name += image.getFileName().substring(image.getFileName().lastIndexOf('.'));
+        if (file.renameTo(new File(image.getReferencePath(), name))) {
+            image.setFileName(name);
+            return true;
+        }
+        return false;
+    }
 
 }

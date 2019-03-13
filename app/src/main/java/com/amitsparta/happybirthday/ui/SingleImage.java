@@ -1,12 +1,18 @@
 package com.amitsparta.happybirthday.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.amitsparta.happybirthday.DataFiles.Image;
 import com.amitsparta.happybirthday.HelperClasses.FileIO;
@@ -48,10 +54,61 @@ public class SingleImage extends AppCompatActivity {
                 onBackPressed();
                 return true;
             case R.id.delete_image:
-                FileIO.deleteImage(image);
-                onBackPressed();
+                confirmFromUser();
+                return true;
+            case R.id.rename_image:
+                renameFile();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void confirmFromUser() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure?");
+        builder.setPositiveButton(R.string.delete_menu_item,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (FileIO.deleteImage(image)) {
+                            Toast.makeText(getApplicationContext(), "Delete successful.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Delete failed.", Toast.LENGTH_SHORT).show();
+                        }
+                        onBackPressed();
+                    }
+                });
+        builder.setNegativeButton("Cancel", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void renameFile() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.rename_dialog, null);
+
+        builder.setView(view);
+        builder.setPositiveButton(R.string.rename_menu_item,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText editView = view.findViewById(R.id.renamed_file_name);
+                        String name = editView.getText().toString().trim();
+                        if (!name.equals("")) {
+                            if (FileIO.renameImage(image, name)) {
+                                Toast.makeText(getApplicationContext(), "Rename successful.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Rename failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+        builder.setNegativeButton("Cancel", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
