@@ -120,19 +120,22 @@ public class ImageListActivity extends AppCompatActivity {
             protected Boolean doInBackground(Void... voids) {
                 ArrayList<Folder> tempArr = new ArrayList();
                 tempArr.addAll(ImageDetector.collectImages(folder.getFolderPath(), Image.IMAGE_MODE));
-                if (!tempArr.equals(folderList)) {
-                    folderList.clear();
-                    folderList.addAll(tempArr);
-                    if (folderList != null && !folderList.isEmpty()) {
-                        FileIO.clearFile(folderList.get(0), Image.IMAGE_MODE);
+                if (folderList != null && !folderList.isEmpty()) {
+                    if (!tempArr.isEmpty()) {
+                        if (!tempArr.get(0).getImages().equals(folderList.get(0).getImages())) {
+                            folderList.clear();
+                            folderList.addAll(tempArr);
+                            FileIO.clearFile(folderList.get(0), Image.IMAGE_MODE);
 
-                        if (FileIO.writeFolderToFile(folderList, Image.IMAGE_MODE)) {
-                            Log.i("Folder Activity", "Written to file");
-                        } else {
-                            Log.i("Folder Activity", "Unable to write to file");
+                            if (FileIO.writeFolderToFile(folderList, Image.IMAGE_MODE)) {
+                                Log.i("Folder Activity", "Written to file");
+                            } else {
+                                Log.i("Folder Activity", "Unable to write to file");
+                            }
+                            return true;
                         }
-                        return true;
                     }
+                    return false;
                 }
                 return false;
             }

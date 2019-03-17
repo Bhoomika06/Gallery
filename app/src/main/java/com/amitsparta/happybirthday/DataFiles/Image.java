@@ -2,13 +2,14 @@ package com.amitsparta.happybirthday.DataFiles;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 
 import com.amitsparta.happybirthday.HelperClasses.FileIO;
 
 import java.io.File;
 import java.io.Serializable;
 
-public class Image implements Serializable {
+public class Image implements Serializable, Comparable<Image> {
 
     private String filePath;
     private String fileName;
@@ -56,5 +57,10 @@ public class Image implements Serializable {
     @Override
     public String toString() {
         return fileName;
+    }
+
+    @Override
+    public int compareTo(@NonNull Image o) {
+        return this.toString().compareTo(o.toString());
     }
 }
