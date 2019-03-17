@@ -7,6 +7,7 @@ import com.amitsparta.happybirthday.DataFiles.Image;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class ImageDetector {
@@ -50,7 +51,7 @@ public class ImageDetector {
             }
         }
         ArrayList temp = new ArrayList<>(detector.folderList);
-        //Collections.sort(temp);
+        Collections.sort(temp);
         return temp;
     }
 

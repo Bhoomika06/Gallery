@@ -1,9 +1,11 @@
 package com.amitsparta.happybirthday.DataFiles;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Folder implements Serializable {
+public class Folder implements Serializable, Comparable<Folder> {
 
     private ArrayList<Image> images;
     private String folderPath;
@@ -74,5 +76,10 @@ public class Folder implements Serializable {
     @Override
     public String toString() {
         return folderName;
+    }
+
+    @Override
+    public int compareTo(@NonNull Folder o) {
+        return this.toString().compareTo(o.toString());
     }
 }
