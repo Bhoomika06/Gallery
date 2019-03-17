@@ -23,11 +23,10 @@ import com.amitsparta.happybirthday.R;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class FolderActivity extends AppCompatActivity {
 
-    private ArrayList folderList;
+    private ArrayList<Folder> folderList;
     private FolderAdapter folderAdapter;
     private ProgressBar progressBar;
 
@@ -50,7 +49,7 @@ public class FolderActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.folder_list);
 
-        folderList = new ArrayList();
+        folderList = new ArrayList<Folder>();
         folderAdapter = new FolderAdapter(getApplicationContext(), folderList);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
 
@@ -64,13 +63,13 @@ public class FolderActivity extends AppCompatActivity {
 
     @SuppressLint("StaticFieldLeak")
     private void loadPreviousFolders() {
-        if (FileIO.hasFolderList()) {
+        if (FileIO.hasFolderList(null, Folder.FOLDER_MODE)) {
             new AsyncTask<Void, Void, Void>() {
 
                 @Override
                 protected Void doInBackground(Void... voids) {
                     folderList.clear();
-                    ArrayList tempArr = FileIO.getFolderFromFile();
+                    ArrayList<Folder> tempArr = FileIO.getFolderFromFile();
                     if (tempArr != null) {
                         folderList.addAll(tempArr);
                     }
@@ -91,16 +90,16 @@ public class FolderActivity extends AppCompatActivity {
 
     private void scanForMoreFolders() {
         BackgroundImageScanner imageScanner = new BackgroundImageScanner(new File(Folder.ABSOLUTE_FILE_PATH));
-        imageScanner.getFolderList().observe(this, new Observer<HashSet<Folder>>() {
+        imageScanner.getFolderList().observe(this, new Observer<ArrayList<Folder>>() {
             @Override
-            public void onChanged(@Nullable HashSet<Folder> folders) {
-                ArrayList tempArr = new ArrayList();
+            public void onChanged(@Nullable ArrayList<Folder> folders) {
+                ArrayList<Folder> tempArr = new ArrayList();
                 tempArr.addAll(folders);
-                if (tempArr.size() != folderList.size()) {
+                if (!tempArr.equals(folderList)) {
                     folderList.clear();
                     folderList.addAll(tempArr);
-                    FileIO.clearFile();
-                    if (FileIO.writeFolderToFile(folderList)) {
+                    FileIO.clearFile(null, Folder.FOLDER_MODE);
+                    if (FileIO.writeFolderToFile(folderList, Folder.FOLDER_MODE)) {
                         Log.i("Folder Activity", "Written to file");
                     } else {
                         Log.i("Folder Activity", "Unable to write to file");

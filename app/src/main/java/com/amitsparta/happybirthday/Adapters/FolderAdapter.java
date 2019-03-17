@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHolder> {
 
     private Context context;
-    private ArrayList folders;
+    private ArrayList<Folder> folders;
 
     public FolderAdapter(Context context, ArrayList folders) {
         this.context = context;
@@ -39,12 +39,12 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
 
     @Override
     public void onBindViewHolder(@NonNull final FolderHolder holder, int position) {
-        holder.displayItem((Folder) folders.get(position));
+        holder.displayItem(folders.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ImageListActivity.class);
-                intent.putExtra(ImageListActivity.FOLDER_INTENT_EXTRA, (Folder) folders.get(holder.getAdapterPosition()));
+                intent.putExtra(ImageListActivity.FOLDER_INTENT_EXTRA, folders.get(holder.getAdapterPosition()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

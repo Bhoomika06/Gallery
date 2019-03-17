@@ -23,12 +23,18 @@ public final class FileIO {
      Folder related functions.
      */
 
-    public static boolean hasFolderList() {
-        File file = new File(Folder.HIDDEN_FILE_PATH + Folder.HIDDEN_FOLDER_LIST_FILE_NAME);
+    public static boolean hasFolderList(Folder folder, int mode) {
+        String path;
+        if (mode == Image.IMAGE_MODE) {
+            path = folder.HIDDEN_FOLDER_LIST_FILE_NAME_PER_FOLDER;
+        } else {
+            path = Folder.HIDDEN_FOLDER_LIST_FILE_NAME;
+        }
+        File file = new File(Folder.HIDDEN_FILE_PATH, path);
         return file.exists();
     }
 
-    public static boolean writeFolderToFile(ArrayList<Folder> folderList) {
+    public static boolean writeFolderToFile(ArrayList<Folder> folderList, int mode) {
         File file = new File(Folder.HIDDEN_FILE_PATH);
         if (file.mkdir()) {
             File file1 = new File(Folder.HIDDEN_FILE_PATH + "/.nomedia");
@@ -38,8 +44,14 @@ public final class FileIO {
                 e.printStackTrace();
             }
         }
+        String hiddenFileName = null;
+        if (mode == Image.IMAGE_MODE) {
+            hiddenFileName = folderList.get(0).HIDDEN_FOLDER_LIST_FILE_NAME_PER_FOLDER;
+        } else if (mode == Folder.FOLDER_MODE) {
+            hiddenFileName = Folder.HIDDEN_FOLDER_LIST_FILE_NAME;
+        }
         try (FileOutputStream outputStream = new FileOutputStream(
-                new File(Folder.HIDDEN_FILE_PATH + Folder.HIDDEN_FOLDER_LIST_FILE_NAME))) {
+                new File(Folder.HIDDEN_FILE_PATH, hiddenFileName))) {
 
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(folderList);
@@ -72,9 +84,15 @@ public final class FileIO {
         }
     }
 
-    public static void clearFile() {
-        if (FileIO.hasFolderList()) {
-            File file = new File(Folder.HIDDEN_FILE_PATH, Folder.HIDDEN_FOLDER_LIST_FILE_NAME);
+    public static void clearFile(Folder folder, int mode) {
+        if (FileIO.hasFolderList(folder, mode)) {
+            String path;
+            if (mode == Image.IMAGE_MODE) {
+                path = folder.HIDDEN_FOLDER_LIST_FILE_NAME_PER_FOLDER;
+            } else {
+                path = Folder.HIDDEN_FOLDER_LIST_FILE_NAME;
+            }
+            File file = new File(Folder.HIDDEN_FILE_PATH, path);
             file.delete();
         }
     }

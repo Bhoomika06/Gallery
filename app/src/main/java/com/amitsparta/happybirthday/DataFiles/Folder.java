@@ -17,10 +17,14 @@ public class Folder implements Serializable {
 
     public static final String HIDDEN_FOLDER_LIST_FILE_NAME = "/folderList.ser";
 
+    public static final int FOLDER_MODE = 1;
+    public final String HIDDEN_FOLDER_LIST_FILE_NAME_PER_FOLDER;
+
     public Folder(String folderPath) {
         images = new ArrayList<>();
         this.folderPath = folderPath;
         createFolderName();
+        HIDDEN_FOLDER_LIST_FILE_NAME_PER_FOLDER = "/" + folderName + ".ser";
     }
 
     private void createFolderName() {
@@ -59,7 +63,16 @@ public class Folder implements Serializable {
         return folderName;
     }
 
+    public String getFolderPath() {
+        return folderPath;
+    }
+
     public boolean compareFolders(String folder) {
         return createFolderName(folder).equals(folderName);
+    }
+
+    @Override
+    public String toString() {
+        return folderName;
     }
 }

@@ -6,9 +6,10 @@ import com.amitsparta.happybirthday.DataFiles.Folder;
 import com.amitsparta.happybirthday.DataFiles.Image;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
 
-class ImageDetector {
+public class ImageDetector {
 
     private ImageDetector() {
     }
@@ -31,13 +32,18 @@ class ImageDetector {
         return false;
     }
 
-    public static HashSet<Folder> collectImages(@NonNull File file, Void v) {
+    public static ArrayList<Folder> collectImages(String fileName) {
+        return collectImages(new File(fileName), null);
+    }
+
+    public static ArrayList<Folder> collectImages(@NonNull File file, Void v) {
 
         ImageDetector detector = new ImageDetector();
         detector.folderList = new HashSet<>();
         detector.collectImages(file);
-        return detector.folderList;
-
+        ArrayList temp = new ArrayList<>(detector.folderList);
+        //Collections.sort(temp);
+        return temp;
     }
 
     private void collectImages(@NonNull File file) {

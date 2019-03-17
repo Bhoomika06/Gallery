@@ -9,21 +9,21 @@ import android.os.AsyncTask;
 import com.amitsparta.happybirthday.DataFiles.Folder;
 
 import java.io.File;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class BackgroundImageScanner extends ViewModel {
 
     private File root;
-    private HashSet<Folder> folderList;
-    private MutableLiveData<HashSet<Folder>> folderListLiveData;
+    private ArrayList<Folder> folderList;
+    private MutableLiveData<ArrayList<Folder>> folderListLiveData;
 
     public BackgroundImageScanner(File root) {
         this.root = root;
-        folderList = new HashSet<>();
+        folderList = new ArrayList<>();
     }
 
     @SuppressLint("StaticFieldLeak")
-    public LiveData<HashSet<Folder>> getFolderList() {
+    public LiveData<ArrayList<Folder>> getFolderList() {
         if (folderListLiveData == null) {
             folderListLiveData = new MutableLiveData<>();
             new AsyncTask<Void, Void, Void>() {

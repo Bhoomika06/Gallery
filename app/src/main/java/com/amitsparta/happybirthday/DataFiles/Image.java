@@ -13,6 +13,8 @@ public class Image implements Serializable {
     private String filePath;
     private String fileName;
 
+    public static final int IMAGE_MODE = 4;
+
     public Image(File file) {
         this.filePath = file.getAbsolutePath();
         fileName = file.getName();
@@ -49,5 +51,10 @@ public class Image implements Serializable {
 
     public void setFileName(String name) {
         fileName = name;
+    }
+
+    @Override
+    public String toString() {
+        return fileName;
     }
 }

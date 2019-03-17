@@ -22,14 +22,12 @@
         </activity>
         <activity
             android:name=".ui.ImageListActivity"
+            android:launchMode="singleTask"
             android:parentActivityName=".ui.FolderActivity" />
         <activity
             android:name=".ui.SingleImage"
             android:parentActivityName=".ui.ImageListActivity" />
 
     </application>
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>
