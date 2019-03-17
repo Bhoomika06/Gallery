@@ -119,7 +119,7 @@ public class ImageListActivity extends AppCompatActivity {
             @Override
             protected Boolean doInBackground(Void... voids) {
                 ArrayList<Folder> tempArr = new ArrayList();
-                tempArr.addAll(ImageDetector.collectImages(folder.getFolderPath()));
+                tempArr.addAll(ImageDetector.collectImages(folder.getFolderPath(), Image.IMAGE_MODE));
                 if (!tempArr.equals(folderList)) {
                     folderList.clear();
                     folderList.addAll(tempArr);

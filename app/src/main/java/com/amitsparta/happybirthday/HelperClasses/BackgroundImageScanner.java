@@ -16,10 +16,12 @@ public class BackgroundImageScanner extends ViewModel {
     private File root;
     private ArrayList<Folder> folderList;
     private MutableLiveData<ArrayList<Folder>> folderListLiveData;
+    private int mode;
 
-    public BackgroundImageScanner(File root) {
+    public BackgroundImageScanner(File root, int mode) {
         this.root = root;
         folderList = new ArrayList<>();
+        this.mode = mode;
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -30,7 +32,7 @@ public class BackgroundImageScanner extends ViewModel {
 
                 @Override
                 protected Void doInBackground(Void... voids) {
-                    folderListLiveData.postValue(ImageDetector.collectImages(root, null));
+                    folderListLiveData.postValue(ImageDetector.collectImages(root, mode));
                     return null;
                 }
             }.execute();

@@ -89,7 +89,7 @@ public class FolderActivity extends AppCompatActivity {
     }
 
     private void scanForMoreFolders() {
-        BackgroundImageScanner imageScanner = new BackgroundImageScanner(new File(Folder.ABSOLUTE_FILE_PATH));
+        BackgroundImageScanner imageScanner = new BackgroundImageScanner(new File(Folder.ABSOLUTE_FILE_PATH), Folder.FOLDER_MODE);
         imageScanner.getFolderList().observe(this, new Observer<ArrayList<Folder>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Folder> folders) {

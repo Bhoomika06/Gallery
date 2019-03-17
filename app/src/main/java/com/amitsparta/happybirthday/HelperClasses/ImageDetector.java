@@ -32,18 +32,40 @@ public class ImageDetector {
         return false;
     }
 
-    public static ArrayList<Folder> collectImages(String fileName) {
-        return collectImages(new File(fileName), null);
+    public static ArrayList<Folder> collectImages(String fileName, int mode) {
+        return collectImages(new File(fileName), mode);
     }
 
-    public static ArrayList<Folder> collectImages(@NonNull File file, Void v) {
+    public static ArrayList<Folder> collectImages(@NonNull File file, int mode) {
 
         ImageDetector detector = new ImageDetector();
         detector.folderList = new HashSet<>();
-        detector.collectImages(file);
+        if (mode == Folder.FOLDER_MODE) {
+            detector.collectImages(file);
+        } else if (mode == Image.IMAGE_MODE) {
+            if (file.getAbsolutePath().equals(Folder.ABSOLUTE_FILE_PATH)) {
+                detector.collectImagesOneGO(file);
+            } else {
+                detector.collectImages(file);
+            }
+        }
         ArrayList temp = new ArrayList<>(detector.folderList);
         //Collections.sort(temp);
         return temp;
+    }
+
+    private void collectImagesOneGO(File file) {
+        File internalFiles[] = file.listFiles();
+        if (internalFiles == null || file.getName().equals("Android") || file.getName().equals(Folder.HIDDEN_FILE_NAME))
+            return;
+        for (File file1 : internalFiles) {
+            Boolean isImage = ImageDetector.checkIfImage(file1);
+            if (isImage == null) {
+                continue;
+            } else if (isImage) {
+                addFolderAndImage(file1);
+            }
+        }
     }
 
     private void collectImages(@NonNull File file) {
