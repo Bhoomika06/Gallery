@@ -34,6 +34,13 @@ public final class FileIO {
         return file.exists();
     }
 
+    public static boolean writeFolderToFile(Folder folder, int mode) {
+        ArrayList<Folder> folderArrayList = new ArrayList();
+        folderArrayList.add(folder);
+        return writeFolderToFile(folderArrayList, mode);
+    }
+
+
     public static boolean writeFolderToFile(ArrayList<Folder> folderList, int mode) {
         File file = new File(Folder.HIDDEN_FILE_PATH);
         if (file.mkdir()) {
@@ -54,7 +61,11 @@ public final class FileIO {
                 new File(Folder.HIDDEN_FILE_PATH, hiddenFileName))) {
 
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(folderList);
+            if (mode == Folder.FOLDER_MODE) {
+                objectOutputStream.writeObject(folderList);
+            } else {
+                objectOutputStream.writeObject(folderList.get(0));
+            }
             objectOutputStream.close();
             Log.i("Folder Activity", "Successfully written.");
             return true;
@@ -115,7 +126,6 @@ public final class FileIO {
         try (FileOutputStream outputStream = new FileOutputStream(file)) {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
             outputStream.flush();
-            outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 
 import com.amitsparta.happybirthday.Adapters.FolderAdapter;
 import com.amitsparta.happybirthday.DataFiles.Folder;
-import com.amitsparta.happybirthday.HelperClasses.BackgroundImageScanner;
+import com.amitsparta.happybirthday.HelperClasses.BackgroundFolderScanner;
 import com.amitsparta.happybirthday.HelperClasses.FileIO;
 import com.amitsparta.happybirthday.R;
 
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class FolderActivity extends AppCompatActivity {
 
-    private ArrayList<Folder> folderList;
+    static ArrayList<Folder> folderList;
     private FolderAdapter folderAdapter;
     private ProgressBar progressBar;
 
@@ -89,24 +89,22 @@ public class FolderActivity extends AppCompatActivity {
     }
 
     private void scanForMoreFolders() {
-        BackgroundImageScanner imageScanner = new BackgroundImageScanner(new File(Folder.ABSOLUTE_FILE_PATH), Folder.FOLDER_MODE);
+        BackgroundFolderScanner imageScanner = new BackgroundFolderScanner(new File(Folder.ABSOLUTE_FILE_PATH), Folder.FOLDER_MODE);
         imageScanner.getFolderList().observe(this, new Observer<ArrayList<Folder>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Folder> folders) {
                 ArrayList<Folder> tempArr = new ArrayList();
                 tempArr.addAll(folders);
-                if (!tempArr.equals(folderList)) {
-                    folderList.clear();
-                    folderList.addAll(tempArr);
-                    FileIO.clearFile(null, Folder.FOLDER_MODE);
-                    if (FileIO.writeFolderToFile(folderList, Folder.FOLDER_MODE)) {
-                        Log.i("Folder Activity", "Written to file");
-                    } else {
-                        Log.i("Folder Activity", "Unable to write to file");
-                    }
-                    folderAdapter.notifyItemInserted(folderList.size());
-                    folderAdapter.notifyDataSetChanged();
+                folderList.clear();
+                folderList.addAll(tempArr);
+                FileIO.clearFile(null, Folder.FOLDER_MODE);
+                if (FileIO.writeFolderToFile(folderList, Folder.FOLDER_MODE)) {
+                    Log.i("Folder Activity", "Written to file");
+                } else {
+                    Log.i("Folder Activity", "Unable to write to file");
                 }
+                folderAdapter.notifyItemInserted(folderList.size());
+                folderAdapter.notifyDataSetChanged();
                 if (folderList.size() > 0)
                     progressBar.setVisibility(View.GONE);
             }
