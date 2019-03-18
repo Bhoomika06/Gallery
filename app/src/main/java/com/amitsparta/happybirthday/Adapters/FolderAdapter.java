@@ -66,7 +66,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
         }
 
         @SuppressLint("StaticFieldLeak")
-        void displayItem(Folder item) {
+        private void displayItem(Folder item) {
             final ImageView image = itemView.findViewById(R.id.file_image);
             TextView fileName = itemView.findViewById(R.id.file_name);
 

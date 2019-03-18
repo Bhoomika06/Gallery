@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 public final class FileIO {
@@ -164,4 +165,28 @@ public final class FileIO {
         return false;
     }
 
+    public static boolean copyImage(Image image, String dest) {
+        File source = new File(image.getFilePath());
+        File destination = new File(dest, image.getFileName());
+        FileChannel inputStream = null;
+        FileChannel outputStream = null;
+        try {
+            inputStream = new FileInputStream(source).getChannel();
+            outputStream = new FileOutputStream(destination).getChannel();
+            outputStream.transferFrom(inputStream, 0, inputStream.size());
+            inputStream.close();
+            outputStream.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean moveImage(Image image, String dest) {
+        if (copyImage(image, dest)) {
+            return deleteImage(image);
+        }
+        return false;
+    }
 }

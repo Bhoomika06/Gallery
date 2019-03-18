@@ -21,5 +21,8 @@
     <!-- rename_menu_item-->
     <string name="rename_menu_item">Rename</string>
 
+    <!-- Destination selection-->
+    <string name="select_dest">Select destination folder</string>
+
 
 </resources>
