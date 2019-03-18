@@ -46,7 +46,7 @@ public class ImageListActivity extends AppCompatActivity {
             folder = (Folder) savedInstanceState.getSerializable(FOLDER_BUNDLE_KEY);
         }
 
-        imageList = new ArrayList();
+        imageList = folder.getImages();
         RecyclerView recyclerView = findViewById(R.id.image_list);
         adapter = new ImageAdapter(getApplicationContext(), imageList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
