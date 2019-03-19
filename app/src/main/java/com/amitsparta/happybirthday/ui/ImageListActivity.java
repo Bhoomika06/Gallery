@@ -57,6 +57,7 @@ public class ImageListActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
 
+        scanForMoreFolders();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -81,10 +82,12 @@ public class ImageListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        /*
         if (ImageListActivity.NeedReloading) {
             scanForMoreFolders();
             ImageListActivity.NeedReloading = false;
         }
+        */
     }
 
     @SuppressLint("StaticFieldLeak")

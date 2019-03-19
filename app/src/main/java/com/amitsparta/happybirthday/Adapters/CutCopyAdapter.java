@@ -18,7 +18,6 @@ public class CutCopyAdapter extends RecyclerView.Adapter<CutCopyAdapter.FolderNa
 
     private Context context;
     private ArrayList folderList;
-    private int pos = 0;
 
     public CutCopyAdapter(Context context, ArrayList arrayList) {
         this.context = context;
@@ -28,15 +27,16 @@ public class CutCopyAdapter extends RecyclerView.Adapter<CutCopyAdapter.FolderNa
     @NonNull
     @Override
     public FolderNameHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new FolderNameHolder(LayoutInflater.from(context).inflate(R.layout.grid_item, parent, false));
+        return new FolderNameHolder(LayoutInflater.from(context).inflate(R.layout.cut_copy_dialog_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull final FolderNameHolder holder, final int position) {
+        holder.displayList((Folder) folderList.get(position));
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pos = SingleImage.imagePos = position;
+                SingleImage.imagePos = position;
             }
         });
     }

@@ -167,7 +167,7 @@ public final class FileIO {
 
     public static boolean copyImage(Image image, String dest) {
         File source = new File(image.getFilePath());
-        File destination = new File(dest, image.getFileName());
+        File destination = new File(Folder.ABSOLUTE_FILE_PATH, dest + "/" + image.getFileName());
         FileChannel inputStream = null;
         FileChannel outputStream = null;
         try {

@@ -129,22 +129,23 @@ public class SingleImage extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         LayoutInflater inflater = getLayoutInflater();
-        final View view = inflater.inflate(R.layout.main_page, null);
-        CutCopyAdapter adapter = new CutCopyAdapter(getApplicationContext(), FolderActivity.folderList);
-        RecyclerView recyclerView = view.findViewById(R.id.folder_list);
-        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
+        final View view = inflater.inflate(R.layout.image_list, null);
+        CutCopyAdapter adapter = new CutCopyAdapter(view.getContext(), FolderActivity.folderList);
+        RecyclerView recyclerView = view.findViewById(R.id.image_list);
+        LinearLayoutManager manager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
         builder.setView(view);
+        builder.setTitle(R.string.select_dest);
         builder.setPositiveButton(R.string.copy_menu_item,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (imagePos != -1) {
-                            AlertDialog.Builder builder2 = new AlertDialog.Builder(getApplicationContext());
+                            AlertDialog.Builder builder2 = new AlertDialog.Builder(view.getContext());
                             builder2.setMessage("Are you sure?");
-                            builder2.setPositiveButton("Copy to " + FolderActivity.folderList.get(imagePos),
+                            builder2.setPositiveButton("Copy to " + FolderActivity.folderList.get(imagePos).toString(),
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -161,7 +162,8 @@ public class SingleImage extends AppCompatActivity {
                             AlertDialog dialog2 = builder2.create();
                             dialog2.show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Select a folder to copy to.", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Destination folder not selected.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -176,9 +178,9 @@ public class SingleImage extends AppCompatActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         final View view = inflater.inflate(R.layout.main_page, null);
-        CutCopyAdapter adapter = new CutCopyAdapter(getApplicationContext(), FolderActivity.folderList);
+        CutCopyAdapter adapter = new CutCopyAdapter(view.getContext(), FolderActivity.folderList);
         RecyclerView recyclerView = view.findViewById(R.id.folder_list);
-        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager manager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
@@ -188,9 +190,9 @@ public class SingleImage extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (imagePos != -1) {
-                            AlertDialog.Builder builder2 = new AlertDialog.Builder(getApplicationContext());
+                            AlertDialog.Builder builder2 = new AlertDialog.Builder(view.getContext());
                             builder2.setMessage("Are you sure?");
-                            builder2.setPositiveButton("Move to " + FolderActivity.folderList.get(imagePos),
+                            builder2.setPositiveButton("Move to " + FolderActivity.folderList.get(imagePos).toString(),
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -207,7 +209,8 @@ public class SingleImage extends AppCompatActivity {
                             AlertDialog dialog2 = builder2.create();
                             dialog2.show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Select a folder to move to.", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Destination folder not selected.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
