@@ -14,12 +14,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amitsparta.happybirthday.Adapters.CutCopyAdapter;
 import com.amitsparta.happybirthday.DataFiles.Image;
 import com.amitsparta.happybirthday.HelperClasses.FileIO;
 import com.amitsparta.happybirthday.R;
+
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SingleImage extends AppCompatActivity {
 
@@ -66,7 +72,7 @@ public class SingleImage extends AppCompatActivity {
                 ImageListActivity.needReloading = true;
                 return true;
             case R.id.details_image:
-                Toast.makeText(getApplicationContext(), "Under Construction.", Toast.LENGTH_SHORT).show();
+                showDetails();
                 return true;
             case R.id.copy_image:
                 showCopyFolderList();
@@ -222,5 +228,39 @@ public class SingleImage extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void showDetails() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.details_dialog, null);
+
+        File file = new File(image.getFilePath());
+
+        TextView fileName = view.findViewById(R.id.file_details_name);
+        fileName.setText("File Name: " + image.getFileName());
+
+        TextView filePath = view.findViewById(R.id.file_details_path);
+        filePath.setText("File Path: " + image.getFilePath());
+
+        TextView fileSize = view.findViewById(R.id.file_details_size);
+        fileSize.setText("File Size: " + file.length() / 1024 + "kB");
+
+        TextView fileHidden = view.findViewById(R.id.file_details_hidden);
+        fileHidden.setText("Hidden: " + (file.isHidden() ? "Yes" : "No"));
+
+        TextView fileLastModified = view.findViewById(R.id.file_details_last_modified);
+        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+        Date date = new Date(file.lastModified());
+        fileLastModified.setText("Last Modified: " + format.format(date));
+
+        builder.setView(view);
+        builder.setTitle("Details");
+        builder.setNegativeButton("Close", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 }
