@@ -68,7 +68,6 @@ public class SingleImage extends AppCompatActivity {
                 return true;
             case R.id.copy_image:
                 showCopyFolderList();
-
                 return true;
             case R.id.move_image:
                 showMoveFolderList();

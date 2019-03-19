@@ -27,7 +27,6 @@ public class ImageListActivity extends AppCompatActivity {
 
     public static final String FOLDER_INTENT_EXTRA = "folderName";
     private final String FOLDER_BUNDLE_KEY = "bundleKey";
-    static boolean NeedReloading = true;
     private ImageAdapter adapter;
     private Folder folder;
     private ProgressBar progressBar;
@@ -77,17 +76,6 @@ public class ImageListActivity extends AppCompatActivity {
             outState = new Bundle();
         }
         outState.putSerializable(FOLDER_BUNDLE_KEY, folder);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        /*
-        if (ImageListActivity.NeedReloading) {
-            scanForMoreFolders();
-            ImageListActivity.NeedReloading = false;
-        }
-        */
     }
 
     @SuppressLint("StaticFieldLeak")
