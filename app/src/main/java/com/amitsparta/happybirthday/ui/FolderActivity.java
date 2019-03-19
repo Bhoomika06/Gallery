@@ -69,7 +69,7 @@ public class FolderActivity extends AppCompatActivity {
                 @Override
                 protected Void doInBackground(Void... voids) {
                     folderList.clear();
-                    ArrayList<Folder> tempArr = FileIO.getFolderFromFile();
+                    ArrayList<Folder> tempArr = FileIO.getFolderFromFile(null, Folder.FOLDER_MODE);
                     if (tempArr != null) {
                         folderList.addAll(tempArr);
                     }

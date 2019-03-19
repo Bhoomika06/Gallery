@@ -99,7 +99,7 @@ public class ImageListActivity extends AppCompatActivity {
 
                 @Override
                 protected Void doInBackground(Void... voids) {
-                    ArrayList<Folder> tempArr = FileIO.getFolderFromFile();
+                    ArrayList<Folder> tempArr = FileIO.getFolderFromFile(folder, Image.IMAGE_MODE);
                     if (tempArr != null) {
                         if (folderList.get(0).getImages() != imageList) {
                             imageList.clear();

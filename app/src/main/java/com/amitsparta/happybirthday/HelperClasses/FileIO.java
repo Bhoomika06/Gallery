@@ -78,10 +78,16 @@ public final class FileIO {
         }
     }
 
-    public static ArrayList<Folder> getFolderFromFile() {
+    public static ArrayList<Folder> getFolderFromFile(Folder folder, int mode) {
         File file = new File(Folder.HIDDEN_FILE_PATH);
+        String src = null;
+        if (mode == Image.IMAGE_MODE) {
+            src = folder.HIDDEN_FOLDER_LIST_FILE_NAME_PER_FOLDER;
+        } else {
+            src = Folder.HIDDEN_FOLDER_LIST_FILE_NAME;
+        }
         try (FileInputStream inputStream = new FileInputStream(
-                new File(file.getAbsolutePath(), Folder.HIDDEN_FOLDER_LIST_FILE_NAME))) {
+                new File(file.getAbsolutePath(), src))) {
 
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             ArrayList a = (ArrayList<Folder>) objectInputStream.readObject();
