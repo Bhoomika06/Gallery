@@ -27,14 +27,8 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/paste_image"
-        android:orderInCategory="5"
-        android:title="@string/paste_menu_item"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/rename_image"
-        android:orderInCategory="6"
+        android:orderInCategory="5"
         android:title="@string/rename_menu_item"
         app:showAsAction="never" />
 
