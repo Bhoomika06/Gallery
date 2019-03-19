@@ -251,7 +251,7 @@ public class SingleImage extends AppCompatActivity {
         fileHidden.setText("Hidden: " + (file.isHidden() ? "Yes" : "No"));
 
         TextView fileLastModified = view.findViewById(R.id.file_details_last_modified);
-        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(file.lastModified());
         fileLastModified.setText("Last Modified: " + format.format(date));
 
