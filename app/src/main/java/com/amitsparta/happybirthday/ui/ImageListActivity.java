@@ -3,6 +3,7 @@ package com.amitsparta.happybirthday.ui;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -23,6 +24,8 @@ import com.amitsparta.happybirthday.R;
 
 import java.util.ArrayList;
 
+import static com.amitsparta.happybirthday.ui.FolderActivity.folderList;
+
 public class ImageListActivity extends AppCompatActivity {
 
     public static final String FOLDER_INTENT_EXTRA = "folderName";
@@ -31,6 +34,7 @@ public class ImageListActivity extends AppCompatActivity {
     private Folder folder;
     private ProgressBar progressBar;
     private ArrayList<Image> imageList;
+    static boolean needReloading = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +60,18 @@ public class ImageListActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
 
-        scanForMoreFolders();
+        loadPreviousFolders();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (needReloading) {
+            scanForMoreFolders();
+            needReloading = false;
+        }
     }
 
     @Override
@@ -79,8 +93,34 @@ public class ImageListActivity extends AppCompatActivity {
     }
 
     @SuppressLint("StaticFieldLeak")
+    private void loadPreviousFolders() {
+        if (FileIO.hasFolderList(null, Folder.FOLDER_MODE)) {
+            new AsyncTask<Void, Void, Void>() {
+
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    ArrayList<Folder> tempArr = FileIO.getFolderFromFile();
+                    if (tempArr != null) {
+                        if (folderList.get(0).getImages() != imageList) {
+                            imageList.clear();
+                            imageList.addAll(folderList.get(0).getImages());
+                        }
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    progressBar.setVisibility(View.GONE);
+                    adapter.notifyItemInserted(folderList.size());
+                }
+            }.execute();
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
     private void scanForMoreFolders() {
-        BackgroundImageScanner imageScanner = new BackgroundImageScanner(folder.getFolderPath(), Image.IMAGE_MODE);
+        BackgroundImageScanner imageScanner = new BackgroundImageScanner(folder.getFolderName(), Image.IMAGE_MODE);
         imageScanner.getImageList().observe(this, new Observer<ArrayList<Image>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Image> images) {

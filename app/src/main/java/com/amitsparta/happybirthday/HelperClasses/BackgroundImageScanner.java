@@ -19,7 +19,7 @@ public class BackgroundImageScanner extends ViewModel {
     private int mode;
 
     public BackgroundImageScanner(String root, int mode) {
-        this.root = root;
+        this.root = Folder.ABSOLUTE_FILE_PATH + "/" + root;
         imageList = new ArrayList<>();
         this.mode = mode;
     }

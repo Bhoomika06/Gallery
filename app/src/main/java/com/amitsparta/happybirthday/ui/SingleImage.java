@@ -59,18 +59,23 @@ public class SingleImage extends AppCompatActivity {
                 return true;
             case R.id.delete_image:
                 confirmFromUser();
+                ImageListActivity.needReloading = true;
                 return true;
             case R.id.rename_image:
                 renameFile();
+                ImageListActivity.needReloading = true;
                 return true;
             case R.id.details_image:
                 Toast.makeText(getApplicationContext(), "Under Construction.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.copy_image:
                 showCopyFolderList();
+                ImageListActivity.needReloading = true;
                 return true;
             case R.id.move_image:
                 showMoveFolderList();
+                ImageListActivity.needReloading = true;
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
